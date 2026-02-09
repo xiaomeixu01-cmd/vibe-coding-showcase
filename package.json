@@ -1,0 +1,13 @@
+{
+  "name": "vibe-coding-showcase",
+  "version": "1.0.0",
+  "description": "Vibe Coding 成果展示页",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build needed'",
+    "start": "npx serve ."
+  },
+  "keywords": ["portfolio", "ai-coding", "vibe-coding"],
+  "author": "",
+  "license": "MIT"
+}

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Coding 成果展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --aurora-purple: #a855f7;
+            --aurora-blue: #3b82f6;
+            --aurora-cyan: #06b6d4;
+            --aurora-pink: #ec4899;
+            --dark-bg: #0a0a0a;
+            --card-bg: #111111;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .aurora-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at 20% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 60%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-blue), var(--aurora-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        section {
+            margin-bottom: 100px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2::before {
+            content: '';
+            width: 6px;
+            height: 40px;
+            background: linear-gradient(180deg, var(--aurora-purple), var(--aurora-cyan));
+            border-radius: 3px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--aurora-purple), var(--aurora-blue), var(--aurora-cyan));
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(168, 85, 247, 0.5);
+            box-shadow: 0 20px 40px rgba(168, 85, 247, 0.1);
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .project-section {
+            margin-bottom: 20px;
+        }
+
+        .project-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--aurora-cyan);
+            margin-bottom: 8px;
+        }
+
+        .project-content {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-blue));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .project-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+        }
+
+        .insights-grid {
+            display: grid;
+            gap: 25px;
+        }
+
+        .insight-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .insight-number {
+            position: absolute;
+            left: 25px;
+            top: 30px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--aurora-purple), var(--aurora-cyan));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .insight-text {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .path-container {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .path-line {
+            position: absolute;
+            left: 18px;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--aurora-purple), var(--aurora-cyan));
+            border-radius: 2px;
+        }
+
+        .path-step {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 30px;
+        }
+
+        .path-step::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: var(--dark-bg);
+            border: 4px solid var(--aurora-cyan);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .path-step-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .path-step-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 40px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="aurora-bg"></div>
+    <div class="container">
+        <header>
+            <h1>Vibe Coding 成果展示</h1>
+            <p class="subtitle">职场妈妈的 AI 跨界学习之旅</p>
+        </header>
+
+        <section>
+            <h2>项目展示</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">分润报表管理系统</h3>
+                    <div class="project-section">
+                        <div class="project-label">痛点</div>
+                        <p class="project-content">财务分润计算复杂、数据权限不透明。</p>
+                    </div>
+                    <div class="project-section">
+                        <div class="project-label">解决方案</div>
+                        <p class="project-content">构建私有化报表平台，实现权限隔离与一键对账。</p>
+                    </div>
+                    <a href="https://28254e413aee4e75a51e9d1370d146d5.prod.enter.pro" class="project-link" target="_blank">查看项目</a>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Excel 拆分脚本小工具</h3>
+                    <div class="project-section">
+                        <div class="project-label">痛点</div>
+                        <p class="project-content">职场人繁琐的重复性表格拆分工作。</p>
+                    </div>
+                    <div class="project-section">
+                        <div class="project-label">解决方案</div>
+                        <p class="project-content">编写自动化 Python 脚本，秒级处理数千行数据。</p>
+                    </div>
+                    <a href="README.md" class="project-link" target="_blank">查看文档</a>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">成长时光机网页</h3>
+                    <div class="project-section">
+                        <div class="project-label">痛点</div>
+                        <p class="project-content">孩子成长点散乱在手机，缺乏温情的数字化归档。</p>
+                    </div>
+                    <div class="project-section">
+                        <div class="project-label">解决方案</div>
+                        <p class="project-content">奶油橘手账风主页，集成相册、荣誉墙与 AI 树洞。</p>
+                    </div>
+                    <a href="https://growth-timeline.vercel.app/" class="project-link" target="_blank">查看项目</a>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">课消管家（MVP）</h3>
+                    <div class="project-section">
+                        <div class="project-label">痛点</div>
+                        <p class="project-content">预付费课程次数难记、机构系统不透明。</p>
+                    </div>
+                    <div class="project-section">
+                        <div class="project-label">解决方案</div>
+                        <p class="project-content">移动端优先的 PWA 应用，实现 "校门口一键消课"。</p>
+                    </div>
+                    <a href="https://0174410cd74549739d93ef2010bec774.prod.enter.pro/" class="project-link" target="_blank">查看项目</a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>学习复盘：AI 编程心得</h2>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-number">1</div>
+                    <p class="insight-text"><strong>从"怎么写"到"怎么想"：</strong>以前觉得编程是背语法，现在发现 Vibe Coding 是提炼痛点。只要场景找得准（准而深），AI 就能成为我最强悍的双手。</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-number">2</div>
+                    <p class="insight-text"><strong>工程思维的觉醒：</strong>在死磕 Supabase RLS 权限和 Vercel 部署的过程中，我学会了查看 Network 面板捕获 "暗号"，这种方式让我不再害怕技术名词。</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-number">3</div>
+                    <p class="insight-text"><strong>跑通胜过完美：</strong>虽然为了赶进度放弃了部分 Edge Functions 改用前端直调，但这种 "先跑通闭环" 的 MVP 思维，让我真正从 "看客" 变成了 "创作者"。</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>AI 编程路径</h2>
+            <div class="path-container">
+                <div class="path-line"></div>
+                <div class="path-step">
+                    <h3 class="path-step-title">1. 需求定义</h3>
+                    <p class="path-step-desc">使用自然语言描述真实痛点。</p>
+                </div>
+                <div class="path-step">
+                    <h3 class="path-step-title">2. 写 PRD 文档</h3>
+                    <p class="path-step-desc">把需求和想法以 PRD 文档的形式清晰展示出来（借助 AI 共创）。</p>
+                </div>
+                <div class="path-step">
+                    <h3 class="path-step-title">3. MVP 开发</h3>
+                    <p class="path-step-desc">利用 Enter.Pro / TRAE 等编程工具，快速生成产品框架。</p>
+                </div>
+                <div class="path-step">
+                    <h3 class="path-step-title">4. 优化迭代</h3>
+                    <p class="path-step-desc">通过多轮对话不断修改、调试细节，直至产品闭环部署。</p>
+                </div>
+                <div class="path-step">
+                    <h3 class="path-step-title">5. 产品部署</h3>
+                    <p class="path-step-desc">通过 GitHub 进行版本管理，利用 Vercel 实现自动部署。</p>
+                </div>
+                <div class="path-step">
+                    <h3 class="path-step-title">6. AI 赋能</h3>
+                    <p class="path-step-desc">集成百炼/DeepSeek API，让静态页面具备 "对话" 与 "思考" 能力。</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>🚀 用 AI 编程，让想法即刻落地</p>
+        </footer>
+    </div>
+</body>
+</html>
